@@ -1,1 +1,78 @@
-Hello
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Take a Picture</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    #videoContainer {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 3%); /* Adjust the padding value as needed */
+      /*padding-bottom: 0px;  Adjust the padding value as needed */
+    }
+    #webcamVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /*margin: 10px;  Add margin to the webcam video */
+    }
+    #captureButton {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px; /* Adjust button width */
+      height: 80px; /* Adjust button height */
+      border-radius: 50%; /* Make the button circular */
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+    #captureButton img {
+      width: 50%; /* Adjust icon size */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="videoContainer">
+    <video id="webcamVideo" autoplay playsinline></video>
+    <button id="captureButton">
+      <img src="camera.png" alt="Camera Icon">
+    </button>
+  </div>
+
+  <script>
+    const video = document.getElementById('webcamVideo');
+    const captureButton = document.getElementById('captureButton');
+
+    // Access the user's webcam stream
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(error => {
+        console.error('Error accessing webcam:', error);
+      });
+
+    captureButton.addEventListener('click', () => {
+      // You can add your camera capture logic here, for example, capturing a frame from the video feed.
+      // This example just logs a message to the console.
+      console.log('Picture captured!');
+    });
+  </script>
+</body>
+</html>
